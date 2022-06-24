@@ -20,7 +20,7 @@ public class HomeWork_3 {
             car.run();
             car.stop();
             car.light();
-            if(car instanceof Vaz) {
+            if (car instanceof Vaz) {
                 Vaz notMyVaz = (Vaz) car;
                 notMyVaz.breaksDown();
             } else if (car instanceof Toyota) {
@@ -38,7 +38,7 @@ public class HomeWork_3 {
         FileReader fileReader = new FileReader("D:\\java\\repos\\my_first_project\\resource\\my_first_file.txt");
         String result = "";
         BufferedReader bufferedReader = new BufferedReader(fileReader);
-        while (bufferedReader.ready()){
+        while (bufferedReader.ready()) {
             String readLine = bufferedReader.readLine();
             result += readLine + " ";
         }
@@ -52,9 +52,9 @@ public class HomeWork_3 {
         // 3. Создать объект этого класса прямо здесь (class Homework3, метод main), с доходами 500, расходами 300
         // 4. Записать в файл "report.txt" данные из объекта класса.
         // Ожидаемый результат: в файле report.txt - одна строка: доходы = 500, расходы 300
-        Financialrecord financialrecord = new Financialrecord(500,300);
+        Financialrecord financialrecord = new Financialrecord(500, 300);
         FileWriter fileWriter = new FileWriter("D:\\java\\repos\\my_first_project\\resource\\report.txt");
-        fileWriter.write( financialrecord.getIncomes() + ";" + financialrecord.getOutcomes() + ";");
+        fileWriter.write(financialrecord.getIncomes() + ";" + financialrecord.getOutcomes());
         fileWriter.close();
 
         //Продвинутый уровень
@@ -69,9 +69,9 @@ public class HomeWork_3 {
         for (int i = 0; i < 20; i++) {
             cars1[i] = CarFactory.createVaz();
             cars1[i + 20] = CarFactory.createToyota();
-            }
+        }
         for (int i = 0; i < cars1.length; i++) {
-            if(cars1[i] instanceof Vaz) {
+            if (cars1[i] instanceof Vaz) {
                 ((Vaz) cars1[i]).breaksDown();
             } else if (cars1[i] instanceof Toyota) {
                 ((Toyota) cars1[i]).turnsOnMusic();
@@ -91,24 +91,26 @@ public class HomeWork_3 {
                 true);
         for (int i = 0; i < financialrecord1.length; i++) {
             financialrecord1[i] = new Financialrecord(random.nextInt(200), random.nextInt(100));
-            fileWriter1.write( financialrecord1[i].getIncomes() + ";" + financialrecord1[i].getOutcomes() + ";");
+            fileWriter1.write("\n" + financialrecord1[i].getIncomes() + ";" + financialrecord1[i].getOutcomes());
         }
         fileWriter1.close();
+
         FileReader fileReader1 = new FileReader("D:\\java\\repos\\my_first_project\\resource\\report.txt");
         BufferedReader bufferedReader1 = new BufferedReader(fileReader1);
-        String myResult = bufferedReader1.readLine();
-        fileReader1.close();
-        String[] arrayResult = myResult.split(";");
         int income = 0;
         int outcome = 0;
-        for (int i = 0; i < arrayResult.length - 1; i += 2) {
-            income += Integer.parseInt(arrayResult[i]);
-            outcome += Integer.parseInt(arrayResult[i + 1]);
+        while (bufferedReader1.ready()) {
+            String myResult = bufferedReader1.readLine();
+            String[] arrayResult = myResult.split(";");
+            income += Integer.parseInt(arrayResult[0]);
+            outcome += Integer.parseInt(arrayResult[1]);
         }
+        fileReader1.close();
         System.out.println("Общие доходы " + income + " Общие расходы " + outcome);
-
     }
 }
+
+
 
 
 
